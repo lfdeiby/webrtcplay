@@ -4,25 +4,108 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WEBRTC</title>
-    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="/public/css/main.css" />
+    <link rel="stylesheet" href="/public/fonts/icomoon/style.css" />
 </head>
 <body>
-    <h1>Realtime communication with WebRTC Server nodejs</h1>
+    <div id="main">
+        <video id="localVideo" class="video" autoplay playsinline></video>
+        <video id="remoteVideo" class="video" autoplay playsinline></video>
 
-    <div class="col col2">
-        <div id="videos">
-            <video id="localVideo" autoplay playsinline></video>
-            <video id="remoteVideo" autoplay playsinline></video>
+        <div class="action header">
+            <div>
+                <a id="logo" href="#" class="logo">
+                    <img src="/public/img/logo.png" alt="Logo">
+                </a>
+            </div>
+            <div class="principal">
+                <button id="information">
+                    <span class="icon-user"></span>
+                </button>
+                <button id="setting">
+                    <span class="icon-cog"></span>
+                </button>
+            </div>
         </div>
-        <div>
-            <div id="console">
 
+        <div class="action footer">
+            <div class="principal">
+                <button id="microphone" class="">
+                    <span class="icon-microphone"></span>
+                </button>
+                <div class="call-hangup">
+                    <button id="call">
+                        <span class="icon-phone"></span>
+                    </button>
+                    <button id="hangup" class="hide">
+                        <span class="icon-phone-hang-up"></span>
+                    </button>
+                </div>
+                <button id="camera" class="">
+                    <span class="icon-video"></span>
+                </button>
+            </div>
+            <button id="chat" class="chat">
+                <span class="icon-chat"></span>
+            </button>
+        </div>
+        
+        <div id="popup" class="">
+            <div id="popupmain">
+                
+            </div>
+        </div>
+
+        <div id="loading">
+            <span class="icon icon-spinner2"></span>
+        </div>
+
+
+        <div id="zz" class="col col2">
+            <div id="videos">
+                <button id="snapandsend"> Snap </button> <br>
+                
+    
+                <div>
+                    <canvas id="photo"></canvas>
+                </div>
+                <div id="incoming">
+                    <h2>Incomiong photos</h2>
+                    <div id="trail"></div>
+                </div>
+    
+            </div>
+            <div>
+                <div id="console">
+    
+                </div>
             </div>
         </div>
     </div>
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
-    <script src="js/main.js"></script>
+    <!-- <script src="/public/js/main.js"></script> -->
+
+    <script src="/public/js/global.js"></script>
+    <script src="/public/js/socketio.js"></script>
+    <script src="/public/js/connection/datachannel.js"></script>
+    <script src="/public/js/connection/connection.js"></script>
+    <script src="/public/js/chat/chat.js"></script>
+    <script src="/public/js/information.js"></script>
+    <script src="/public/js/setting.js"></script>
+    <script src="/public/js/screen.js"></script>
+    
+    <script type="text/javascript">
+        document.getElementById('logo').addEventListener('click', function(){
+            triggerConnectionAndSocket();
+            return false;
+        });
+
+        function triggerConnectionAndSocket(){
+            socketio.init();
+            connection.init();
+        }
+    </script>
 </body>
 </html>

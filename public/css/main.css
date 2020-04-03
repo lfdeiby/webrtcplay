@@ -1,0 +1,373 @@
+html, body{
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+body {
+  font-family: helvetica;
+}
+*{
+  box-sizing: border-box;
+  position: relative;
+}
+
+button{
+  align-items: center;
+  background: transparent;
+  border: none;
+  color: #FFF;
+  cursor: pointer;
+  display: flex;
+  font-size: 22px;
+  justify-content: center;
+  outline: none;
+}
+h2{
+  font-size: 18px;
+}
+img{
+  max-width: 100%;
+}
+canvas {
+  max-width: 100%;
+  width: 320px;
+}
+
+.action{
+  position: absolute;
+  left: 0px;
+  padding: 20px 0px;
+  width: 100%;
+  z-index: 10;
+}
+.action.footer{
+  /*background: lightseagreen;*/
+  bottom: 0px;
+}
+.action.footer .chat{
+  color: #FFF;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 30px;
+}
+.action.footer .principal{
+  display: flex;
+  justify-content: center;
+}
+.action.footer .principal button{
+  border: 1px solid #FFF;
+  border-radius: 50%;
+  height: 60px;
+  margin: 0px 5px;
+  transition: all .2s linear;
+  width: 60px;
+}
+.action.footer .principal button:hover{
+  background: #FFF;
+  color: #393939;
+}
+.action.header{
+  /*background: lightskyblue;*/
+  display: flex;
+  justify-content: space-between;
+  top: 0px;
+  padding-right: 30px;
+  padding-left: 30px;
+}
+.action.header button{
+  font-size: 18px;
+  margin: 0px 3px;
+  transition: all .2s linear;
+}
+.action.header button:hover{
+  transform: scale(1.2);
+}
+.action.header .principal{
+  display: flex;
+  justify-content: flex-end;
+}
+.call-hangup{
+  height: 60px;
+  margin: 0px 5px;
+  overflow: hidden;
+  width: 70px;
+}
+.call-hangup #call,
+.call-hangup #hangup{
+  bottom: 0px;
+  color: #FFF;
+  opacity: 1;
+  position: absolute;
+  top: 0px;
+  transition: all.2s linear;
+  z-index: 2;
+}
+.call-hangup #call{
+  background: #5a995d;
+}
+.call-hangup #call:hover{
+  background: #6cc070;
+}
+.call-hangup #hangup{
+  background: #AA0000;
+}
+.call-hangup #hangup:hover{
+  background: #CC0000;
+}
+.call-hangup #call.hide,
+.call-hangup #hangup.hide{
+  opacity: 0;
+  z-index: 0;
+}
+.call-hangup #call.hide{
+  top: -60px;
+}
+.call-hangup #hangup.hide{
+  bottom: -60px;
+}
+#coach{
+  border-radius: 15px;
+  background: rgba(0,0,0,.3);
+  color: #FFF;
+  cursor: default;
+  display: block;
+  overflow: hidden;
+  width: 350px;
+}
+#coach .body{
+  padding: 0px 15px;
+  line-height: 1.4em;
+}
+#coach .body .item{
+  padding-bottom: 10px;
+}
+#coach .close{
+  padding-top: 20px;
+}
+#coach .close button{
+  background: rgba(0,0,0,.6);
+  border-top: 1px solid rgba(255,255,255,.3);
+  color: #FFF;
+  font-size: 16px;
+  padding: 10px 0px;
+  width: 100%;
+}
+#coach .name{
+  border-bottom: 1px solid rgba(255,255,255,.6);
+  margin-bottom: 10px;
+  padding: 10px 0px;
+}
+#coach .name h2{
+  font-weight: normal;
+  margin: 0px;
+  margin-bottom: 5px;
+}
+#coach .picture{
+  height: 200px;
+  overflow: hidden;
+  width: 100%;
+}
+.cut::after{
+  content: '';
+  background: #FFF;
+  height: 1.5px;
+  position: absolute;
+  transform: rotate(130deg);
+  width: 40px;
+}
+.cut:hover::after{
+  background: #676767;
+}
+#loading{
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  z-index: -1;
+}
+#loading.active{
+  z-index: 11;
+}
+
+#loading .icon{
+  color: #EAEAEA;
+  font-size: 52px;
+  animation: loading 2s linear infinite;
+}
+@keyframes loading{
+  0%{
+    transform: rotate(0deg);
+  }
+  100%{
+    transform: rotate(360deg);
+  }
+}
+.logo{
+  display: block;
+  position: absolute;
+  top: -10px;
+  width: 60px;
+}
+.logo img{
+  max-width: 100%;
+}
+#main{
+  background-image: linear-gradient(150deg, violet, indigo);
+  height: 100vh;
+  overflow: hidden;
+  width: 100vw;
+}
+#popup{
+  align-items: center;
+  background: rgba(0,0,0,.2);
+  cursor: zoom-out;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  left: 0px;
+  opacity: 0;
+  position: fixed;
+  top: 0px;
+  transition: all .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  width: 100vw;
+  z-index: -2;
+}
+#popup.active{
+  opacity: 1;
+  z-index: 15;
+}
+#popup #popupmain{
+  cursor: default;
+}
+#settings{
+  background: #FFF;
+  border-radius: 4px;
+  color: #575757;
+  overflow: hidden;
+  width: 350px;
+}
+#settings .body{
+  padding: 0px 15px;
+}
+#settings .close button{
+  color: #6cc070;
+  font-size: 16px;
+  padding: 15px 20px;
+  justify-content: flex-end;
+  width: 100%;
+}
+#settings .close button:hover{
+  color: #5cA060;
+}
+#settings .body label{
+  color: #6cc070;
+  display: block;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+#settings .body select{
+  border: none;
+  border-bottom: 1px solid rgba(0,0,0,.2);
+  font-size: 14px;
+  margin-bottom: 30px;
+  outline: none;
+  width: 100%;
+}
+#settings .title{
+  color: #6cc070;
+  display: block;
+  padding: 0px 15px;
+  border-bottom: 1px solid rgba(0,0,0,.1);
+  margin-bottom: 15px;
+}
+#settings .title h2{
+  font-weight: normal;
+}
+.video{
+  min-width: 100%;
+  min-height: 100%;
+  position: absolute;
+  bottom: 0px;
+  transition: width .3s linear;
+  left: 0px;
+  width: 100%;
+}
+.video#localVideo{
+  z-index: 2;
+}
+.video.minimize{
+  bottom: 30px;
+  border-radius: 10px;
+  left: 30px;
+  min-width: auto;
+  min-height: auto;
+  width: 180px;
+}
+
+@media (max-width:760px){
+  button{
+    font-size: 14px;
+  }
+  .action{
+    padding: 10px 0px;
+  }
+  .action.footer .chat{
+    font-size: 18px;
+    right: 10px;
+  }
+  .action.footer .principal button{
+    height: 40px;
+    margin: 0px 2px;
+    width: 40px;
+  }
+  .action.header{
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+  .call-hangup{
+    height: 40px;
+    width: 45px;
+  }
+  .logo{
+    top: -5px;
+    width: 40px;
+  }
+  .video.minimize{
+    width: 85px;
+    left: 5px;
+    bottom: 10px;
+  }
+
+}
+
+
+
+
+
+
+.col{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+.col2>div:first-child{
+  height: 600px;
+  width: 70%;
+}
+.col2>div:last-child{
+  height: 600px;
+  font-size: 14px;
+  overflow: auto;
+  width: 30%;
+}
+
+
+
+
+#zz{
+  position: fixed;
+  z-index: -1;
+}

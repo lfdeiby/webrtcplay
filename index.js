@@ -63,4 +63,50 @@ io.sockets.on('connection', function(socket){
     socket.on('bye', function(){
         console.log('received bye');
     });
+
+
+    socket.on('webrtc.create', function(room){
+        var clientsInRoom = io.sockets.adapter.rooms[room];
+        var numClients = clientsInRoom ? Object.keys(clientsInRoom.sockets).length : 0;
+        if( numClients == 0 ){
+            socket.join(room);
+            socket.emit('webrtc.created', room, socket.id);
+        }
+        if( numClients == 1 ){
+            io.sockets.in(room).emit('webrtc.createroom', room);
+            socket.join(room);
+            socket.emit('webrtc.created', room, socket.id);
+        };
+        if( numClients >= 2 ){
+            socket.emit('webrtc.full', room, socket.id);
+        }
+        
+    });
+
+    socket.on('webrtc.join', function(room){
+        var clientsInRoom = io.sockets.adapter.rooms[room];
+        var numClients = clientsInRoom ? Object.keys(clientsInRoom.sockets).length : 0;
+        
+        if( numClients == 0 ){
+            socket.join(room);
+            socket.emit('webrtc.wait', room, socket.id);
+        }
+        else if( numClients == 1 ){
+            io.sockets.in(room).emit('webrtc.join', room);
+            socket.join(room);
+            socket.emit('webrtc.joined', room, socket.id);
+            return;
+        }
+        else if( numClients == 2 ){
+            socket.broadcast.emit('webrtc.join', room);
+            socket.emit('webrtc.joined', room, socket.id);
+        }else{
+            console.log('Socket full');
+            socket.emit('webrtc.full', room, socket.id);
+        }
+    });
+
+    socket.on('webrtc.message', function(message){
+        socket.broadcast.emit('webrtc.message', message);
+    });
 });

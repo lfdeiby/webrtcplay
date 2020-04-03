@@ -114,7 +114,7 @@ socket.on('log', function(array){
 
  var constraints = {
     audio: true,
-    video: true
+    video: {width: {min: 1280}, height: {min: 720}}
 }
 
 
@@ -127,7 +127,6 @@ navigator.mediaDevices.getUserMedia(constraints)
 
 
 function gotStream(stream){
-    console.log("Entro al gotStream");
     trace('4-A, 3-B. gotStream()');
     localStream = stream;
     localVideo.autoplay = true;
@@ -136,6 +135,8 @@ function gotStream(stream){
     localVideo.onloadedmetadata = function(){
         photo.width = photoContextW = localVideo.videoWidth;
         photo.height = photoContextH = localVideo.videoHeight;
+
+        
     }
     sendMessage('got user media');
     if( isInitiator == true ){
